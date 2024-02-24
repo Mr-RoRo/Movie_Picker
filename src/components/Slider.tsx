@@ -36,12 +36,11 @@ const Slider = ({ Movies, MoviesGenres }: Props) => {
               {Number(movie.vote_average).toFixed(1)}
             </h2>
             <div className="flex flex-col absolute bottom-8 right-6 font-semibold">
-              {movie.genre_ids
-                .map((id) => MoviesGenres?.genres.find((gen) => gen.id === id))
-                .filter((gen) => gen !== undefined)
-                .map((gen) => (
-                  <h2>{gen?.name}</h2>
-                ))}
+              {
+                MoviesGenres?.genres.find((gen) =>
+                  movie.genre_ids.includes(gen.id)
+                )?.name
+              }
             </div>
           </div>
         </SwiperSlide>
