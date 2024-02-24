@@ -16,7 +16,9 @@ const HomePage = () => {
     ["trendingMovies"],
     24 * 10 * 10 * 1000
   );
-  const { data: popular } = useGet<FetchResponse<MovieAndTVshow>>(
+  const { data: popular, isLoading: popularLoading } = useGet<
+    FetchResponse<MovieAndTVshow>
+  >(
     `${searchParams.get("Popular") === "TVshows" ? "tv" : "movie"}/popular`,
     [
       "popular",
@@ -24,7 +26,9 @@ const HomePage = () => {
     ],
     24 * 10 * 10 * 1000
   );
-  const { data: topRated } = useGet<FetchResponse<MovieAndTVshow>>(
+  const { data: topRated, isLoading: topRatedLoading } = useGet<
+    FetchResponse<MovieAndTVshow>
+  >(
     `${searchParams.get("TopRated") === "TVshows" ? "tv" : "movie"}/top_rated`,
     [
       "topRated",
@@ -37,9 +41,17 @@ const HomePage = () => {
     <div>
       <Slider Movies={trendingMovies?.results} MoviesGenres={moviesGenres} />
       <SectionTitle Title="Popular" />
-      <FreeModeSlider data={popular?.results} MoviesGenres={moviesGenres} />
+      <FreeModeSlider
+        data={popular?.results}
+        MoviesGenres={moviesGenres}
+        isLoading={popularLoading}
+      />
       <SectionTitle Title="TopRated" />
-      <FreeModeSlider data={topRated?.results} MoviesGenres={moviesGenres} />
+      <FreeModeSlider
+        data={topRated?.results}
+        MoviesGenres={moviesGenres}
+        isLoading={topRatedLoading}
+      />
     </div>
   );
 };

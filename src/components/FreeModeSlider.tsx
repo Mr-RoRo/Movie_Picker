@@ -9,9 +9,10 @@ import { Genres, MovieAndTVshow } from "../hooks/types";
 interface Props {
   data?: MovieAndTVshow[];
   MoviesGenres?: Genres;
+  isLoading?: boolean;
 }
 
-const FreeModeSlider = ({ data, MoviesGenres }: Props) => {
+const FreeModeSlider = ({ data, MoviesGenres, isLoading }: Props) => {
   return (
     <Swiper
       spaceBetween={10}
@@ -32,14 +33,20 @@ const FreeModeSlider = ({ data, MoviesGenres }: Props) => {
       modules={[FreeMode, Navigation]}
       className="h-[19rem]"
     >
+      {isLoading &&
+        [1, 2, 3, 4].map((item) => (
+          <SwiperSlide key={item}>
+            <div className="skeleton w-full h-[19rem]"></div>
+          </SwiperSlide>
+        ))}
       {data?.map((item) => (
         <SwiperSlide key={item.id}>
           <div className="w-full h-full relative text-white  rounded-3xl overflow-hidden text-lg">
             <img
-              src={"https://image.tmdb.org/t/p/original" + item.poster_path}
-              className=" "
+              src={"https://image.tmdb.org/t/p/w300" + item.poster_path}
+              className="w-full"
             />
-            <span className="bg-black opacity-45 w-full h-full absolute top-0" />
+            <span className="bg-black opacity-25 w-full h-full absolute top-0" />
             <h1 className="absolute top-3 left-2 font-extrabold text-lg sm:text-xl lg:text-1xl xl:text-2xl">
               {item.title || item.name}
             </h1>
