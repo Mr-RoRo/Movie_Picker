@@ -32,7 +32,7 @@ const NavBar = () => {
   return (
     <>
       {width > 640 && (
-        <div className="navbar container mx-auto bg-base-100 px-3 fixed left-0 right-0">
+        <div className="navbar container mx-auto bg-base-100 px-3 fixed left-0 right-0 z-10">
           <div className="flex-1">
             <h1 className="text-2xl font-bold">Movie Picker</h1>
           </div>
@@ -56,7 +56,7 @@ const NavBar = () => {
         </div>
       )}
       {width <= 640 && (
-        <div className="btm-nav">
+        <div className="btm-nav h-16 z-10">
           {menuItems.map((menuItem) => (
             <Link
               to={menuItem.link}
