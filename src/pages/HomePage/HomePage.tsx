@@ -13,21 +13,24 @@ const HomePage = () => {
   ]);
   const { data: trendingMovies } = useGet<FetchResponse<MovieAndTVshow>>(
     "trending/movie/day",
-    ["trendingMovies"]
+    ["trendingMovies"],
+    24 * 10 * 10 * 1000
   );
   const { data: popular } = useGet<FetchResponse<MovieAndTVshow>>(
     `${searchParams.get("Popular") === "TVshows" ? "tv" : "movie"}/popular`,
     [
       "popular",
       searchParams.get("Popular") === "TVshows" ? "TVshows" : "Movies",
-    ]
+    ],
+    24 * 10 * 10 * 1000
   );
   const { data: topRated } = useGet<FetchResponse<MovieAndTVshow>>(
     `${searchParams.get("TopRated") === "TVshows" ? "tv" : "movie"}/top_rated`,
     [
       "topRated",
       searchParams.get("TopRated") === "TVshows" ? "TVshows" : "Movies",
-    ]
+    ],
+    48 * 10 * 10 * 1000
   );
 
   return (
