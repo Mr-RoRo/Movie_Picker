@@ -4,8 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Movie } from "../hooks/useTrendingMovies";
-import { Genres } from "../hooks/useMoviesGenres";
+import { Genres, Movie } from "../hooks/types";
 
 interface Props {
   Movies?: Movie[];
@@ -22,7 +21,7 @@ const Slider = ({ Movies, MoviesGenres }: Props) => {
       className="h-[20rem] sm:h-[23rem] lg:h-[25rem] xl:h-[31rem] rounded-3xl"
     >
       {Movies?.map((movie) => (
-        <SwiperSlide>
+        <SwiperSlide key={movie.id}>
           <div className="w-[100%] h-[100%] relative text-white text-lg sm:text-2xl lg:text-3xl xl:text-4xl">
             <img
               src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path}
