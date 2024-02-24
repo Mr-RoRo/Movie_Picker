@@ -4,9 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
-
-import { Movie } from "../hooks/useTrendingMovies";
-import { Genres } from "../hooks/useMoviesGenres";
+import { Genres, Movie } from "../hooks/types";
 
 interface Props {
   Movies?: Movie[];
@@ -32,10 +30,10 @@ const FreeModeSlider = ({ Movies, MoviesGenres }: Props) => {
       freeMode
       navigation
       modules={[FreeMode, Navigation]}
-      className="h-[19rem] my-7"
+      className="h-[19rem]"
     >
       {Movies?.map((movie) => (
-        <SwiperSlide>
+        <SwiperSlide key={movie.id}>
           <div className="w-full h-full relative text-white  rounded-3xl overflow-hidden text-lg">
             <img
               src={"https://image.tmdb.org/t/p/original" + movie.poster_path}
@@ -56,7 +54,7 @@ const FreeModeSlider = ({ Movies, MoviesGenres }: Props) => {
             <span className="badge badge-lg glass absolute bottom-9 left-2 font-semibold">
               {Number(movie.vote_average).toFixed(1)}
             </span>
-            <button className="btn btn-primary absolute bottom-2.5 right-2">
+            <button className="btn glass absolute bottom-2.5 right-2">
               Show Details
             </button>
           </div>
