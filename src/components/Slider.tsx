@@ -4,10 +4,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Genres, Movie } from "../hooks/types";
+import { Genres, MovieAndTVshow } from "../hooks/types";
 
 interface Props {
-  Movies?: Movie[];
+  Movies?: MovieAndTVshow[];
   MoviesGenres?: Genres;
 }
 
