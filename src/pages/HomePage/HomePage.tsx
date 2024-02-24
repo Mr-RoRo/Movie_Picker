@@ -1,24 +1,36 @@
 import FreeModeSlider from "../../components/FreeModeSlider";
+import SectionTitle from "../../components/SectionTitle";
 import Slider from "../../components/Slider";
-import useMoviesGenres from "../../hooks/useMoviesGenres";
-import usePopularMovies from "../../hooks/usePopularMovies";
-import useTrendingMovies from "../../hooks/useTrendingMovies";
-import useUpcomingMovies from "../../hooks/useTopRatedMovies";
+import { Genres, Movie } from "../../hooks/types";
+import useGet from "../../hooks/useGet";
+import { FetchResponse } from "../../services/ApiClient";
 
 const HomePage = () => {
-  const { data: trendingMovies } = useTrendingMovies();
-  const { data: moviesGenres } = useMoviesGenres();
-  const { data: popularMovie } = usePopularMovies();
-  const { data: upcomingMovies } = useUpcomingMovies();
+  const { data: moviesGenres } = useGet<Genres>("genre/movie/list", [
+    "moviesGenres",
+  ]);
+  const { data: trendingMovies } = useGet<FetchResponse<Movie>>(
+    "trending/movie/day",
+    ["trendingMovies"]
+  );
+  const { data: popularMovie } = useGet<FetchResponse<Movie>>("movie/popular", [
+    "popularMovies",
+  ]);
+  const { data: topRatedMovies } = useGet<FetchResponse<Movie>>(
+    "movie/top_rated",
+    ["topRatedMovies"]
+  );
   return (
     <div>
       <Slider Movies={trendingMovies?.results} MoviesGenres={moviesGenres} />
+      <SectionTitle Title="Popular" />
       <FreeModeSlider
         Movies={popularMovie?.results}
         MoviesGenres={moviesGenres}
       />
+      <SectionTitle Title="TopRated" />
       <FreeModeSlider
-        Movies={upcomingMovies?.results}
+        Movies={topRatedMovies?.results}
         MoviesGenres={moviesGenres}
       />
     </div>
