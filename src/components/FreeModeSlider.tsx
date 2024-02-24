@@ -1,10 +1,11 @@
 import { FreeMode, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import re from "../assets/react.svg";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import { Genres, MovieAndTVshow } from "../hooks/types";
+import { AsyncImage } from "loadable-image";
 
 interface Props {
   data?: MovieAndTVshow[];
@@ -42,9 +43,11 @@ const FreeModeSlider = ({ data, MoviesGenres, isLoading }: Props) => {
       {data?.map((item) => (
         <SwiperSlide key={item.id}>
           <div className="w-full h-full relative text-white  rounded-3xl overflow-hidden text-lg">
-            <img
+            <AsyncImage
               src={"https://image.tmdb.org/t/p/w300" + item.poster_path}
-              className="w-full"
+              loader={<div className="skeleton " />}
+              className="w-full h-full"
+              style={{ objectFit: "fill" }}
             />
             <span className="bg-black opacity-25 w-full h-full absolute top-0" />
             <h1 className="absolute top-3 left-2 font-extrabold text-lg sm:text-xl lg:text-1xl xl:text-2xl">
