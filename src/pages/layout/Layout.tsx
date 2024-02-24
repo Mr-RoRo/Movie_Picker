@@ -1,10 +1,14 @@
 import { Outlet } from "react-router-dom";
+import NavBar from "./NavBar";
 
 const Layout = () => {
   return (
-    <div>
-      <Outlet />
-    </div>
+    <>
+      <NavBar />
+      <div className="container mx-auto px-3 pt-5 sm:pt-20">
+        <Outlet />
+      </div>
+    </>
   );
 };
 
