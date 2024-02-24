@@ -1,13 +1,15 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const Layout = () => {
   return (
     <>
       <NavBar />
-      <div className="container mx-auto pb-20 px-3 pt-5 sm:pt-20 sm:pb-0">
+      <div className="container mx-auto pb-10 px-3 pt-5 sm:pt-20">
         <Outlet />
       </div>
+      <Footer />
     </>
   );
 };
