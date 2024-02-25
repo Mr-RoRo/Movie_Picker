@@ -1,9 +1,10 @@
 import { FreeMode, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import re from "../assets/react.svg";
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
+
 import { Genres, MovieAndTVshow } from "../hooks/types";
 import { AsyncImage } from "loadable-image";
 
