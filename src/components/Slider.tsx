@@ -1,45 +1,60 @@
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FaStar } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
+import { MdDateRange } from "react-icons/md";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Genres, MovieAndTVshow } from "../hooks/types";
+import { AsyncImage } from "loadable-image";
 
 interface Props {
-  Movies?: MovieAndTVshow[];
+  data?: MovieAndTVshow[];
   MoviesGenres?: Genres;
 }
 
-const Slider = ({ Movies, MoviesGenres }: Props) => {
+const Slider = ({ data, MoviesGenres }: Props) => {
   return (
     <Swiper
       pagination
       navigation
       spaceBetween={10}
       modules={[Pagination, Navigation]}
-      className="h-[20rem] sm:h-[23rem] lg:h-[25rem] xl:h-[31rem] rounded-3xl"
+      className="h-[15rem] sm:h-[23rem] lg:h-[25rem] xl:h-[31rem] rounded-3xl"
     >
-      {Movies?.map((movie) => (
-        <SwiperSlide key={movie.id}>
-          <div className="w-[100%] h-[100%] relative text-white text-lg sm:text-2xl lg:text-3xl xl:text-4xl">
-            <img
-              src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path}
-              className="w-[100%] h-[100%] object-cover "
+      {data?.map((item) => (
+        <SwiperSlide key={item.id}>
+          <div className="w-[100%] h-[100%] flex flex-col- gap-12  text-white sm:text-2xl lg:text-3xl xl:text-4xl">
+            <AsyncImage
+              src={"https://image.tmdb.org/t/p/original" + item.backdrop_path}
+              loader={<div className="skeleton " />}
+              className="w-full h-full"
             />
             <span className="bg-black opacity-25 w-[100%] h-[100%] absolute top-0" />
-            <h1 className="absolute top-8 left-6 font-extrabold text-xl sm:text-3xl lg:text-4xl xl:text-5xl">
-              {movie.title}
-            </h1>
-            <h2 className="absolute bottom-8 left-6 font-semibold">
-              {Number(movie.vote_average).toFixed(1)}
-            </h2>
-            <div className="flex flex-col absolute bottom-8 right-6 font-semibold">
-              {
-                MoviesGenres?.genres.find((gen) =>
-                  movie.genre_ids.includes(gen.id)
-                )?.name
-              }
+            <div className="w-full h-full absolute flex flex-col gap-2 p-6 justify-end">
+              <div className="  flex gap-6">
+                <div className="flex gap-1 items-center font-semibold">
+                  <FaStar className="text-primary" />
+                  {Number(item.vote_average).toFixed(1)}
+                </div>
+                <div className="flex gap-1 items-center font-semibold">
+                  <BiSolidCategory className="text-primary" />
+                  {
+                    MoviesGenres?.genres.find((gen) =>
+                      item.genre_ids.includes(gen.id)
+                    )?.name
+                  }
+                </div>
+                <div className="flex gap-1 items-center font-semibold">
+                  <MdDateRange className="text-primary" />
+                  {item.release_date || item.first_air_date}
+                </div>
+              </div>
+              <h1 className=" font-extrabold sm:text-3xl lg:text-4xl xl:text-5xl">
+                {item.title || item.name}
+              </h1>
             </div>
           </div>
         </SwiperSlide>
