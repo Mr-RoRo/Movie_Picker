@@ -5,6 +5,7 @@ import Slider from "../../components/Slider";
 import { Genres, MovieAndTVshow } from "../../hooks/types";
 import useGet from "../../hooks/useGet";
 import { FetchResponse } from "../../services/ApiClient";
+import DividerSectionTitle from "../../components/DividerSectionTitle";
 
 const HomePage = () => {
   const [searchParams] = useSearchParams();
@@ -14,6 +15,11 @@ const HomePage = () => {
   const { data: trendingMovies } = useGet<FetchResponse<MovieAndTVshow>>(
     "trending/movie/day",
     ["trendingMovies"],
+    24 * 10 * 10 * 1000
+  );
+  const { data: trendingTVshows } = useGet<FetchResponse<MovieAndTVshow>>(
+    "trending/tv/day",
+    ["trendingTVshows"],
     24 * 10 * 10 * 1000
   );
   const { data: popular, isLoading: popularLoading } = useGet<
@@ -39,13 +45,16 @@ const HomePage = () => {
 
   return (
     <div>
-      <Slider Movies={trendingMovies?.results} MoviesGenres={moviesGenres} />
+      <DividerSectionTitle Title={"Trending Movies"} />
+      <Slider data={trendingMovies?.results} MoviesGenres={moviesGenres} />
       <SectionTitle Title="Popular" />
       <FreeModeSlider
         data={popular?.results}
         MoviesGenres={moviesGenres}
         isLoading={popularLoading}
       />
+      <DividerSectionTitle Title={"Trending TVshows"} />
+      <Slider data={trendingTVshows?.results} MoviesGenres={moviesGenres} />
       <SectionTitle Title="TopRated" />
       <FreeModeSlider
         data={topRated?.results}
