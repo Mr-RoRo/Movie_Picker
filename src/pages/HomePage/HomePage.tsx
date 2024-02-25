@@ -45,7 +45,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <DividerSectionTitle Title={"Trending Movies"} />
+      <DividerSectionTitle Title={"Trending Movies"} className="mb-10 mt-0" />
       <Slider data={trendingMovies?.results} MoviesGenres={moviesGenres} />
       <SectionTitle Title="Popular" />
       <FreeModeSlider
@@ -53,7 +53,7 @@ const HomePage = () => {
         MoviesGenres={moviesGenres}
         isLoading={popularLoading}
       />
-      <DividerSectionTitle Title={"Trending TVshows"} />
+      <DividerSectionTitle Title={"Trending TVshows"} className="my-10" />
       <Slider data={trendingTVshows?.results} MoviesGenres={moviesGenres} />
       <SectionTitle Title="TopRated" />
       <FreeModeSlider
