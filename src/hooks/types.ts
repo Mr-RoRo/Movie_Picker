@@ -19,8 +19,6 @@ export interface MovieAndTVshow {
   vote_count: number;
 }
 export interface Genres {
-  genres: {
-    id: number;
-    name: string;
-  }[];
+  id: number;
+  name: string;
 }
