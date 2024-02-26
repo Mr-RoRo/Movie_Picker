@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { MovieAndTVshow } from "../hooks/types";
-import useGenreStore from "../store";
+import { useGenreStore } from "../store";
 
 const Slider = ({ data }: { data?: MovieAndTVshow[] }) => {
   const genres = useGenreStore((s) => s.genres);

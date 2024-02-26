@@ -6,7 +6,7 @@ import { Genres, MovieAndTVshow } from "../../hooks/types";
 import useGet from "../../hooks/useGet";
 import { FetchResponse } from "../../services/ApiClient";
 import DividerSectionTitle from "../../components/DividerSectionTitle";
-import useGenreStore from "../../store";
+import { useGenreStore } from "../../store";
 
 const HomePage = () => {
   //get genres list

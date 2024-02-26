@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 
 import { AsyncImage } from "loadable-image";
 import { MovieAndTVshow } from "../hooks/types";
-import useGenreStore from "../store";
+import { useGenreStore } from "../store";
 
 interface Props {
   data?: MovieAndTVshow[];
