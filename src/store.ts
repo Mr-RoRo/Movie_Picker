@@ -6,7 +6,12 @@ interface GenresStore {
   setGenres: (genres: Genres[]) => void;
 }
 
-const useGenreStore = create<GenresStore>((set) => ({
+interface SearchStore {
+  search: string;
+  setSearch: (search: string) => void;
+}
+
+export const useGenreStore = create<GenresStore>((set) => ({
   genres: [{ id: 0, name: "" }],
   setGenres: (newGenres) =>
     set((prev) => ({
@@ -14,4 +19,7 @@ const useGenreStore = create<GenresStore>((set) => ({
     })),
 }));
 
-export default useGenreStore;
+export const useSearch = create<SearchStore>((set) => ({
+  search: "",
+  setSearch: (search: string) => set(() => ({ search: search })),
+}));
