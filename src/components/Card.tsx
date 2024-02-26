@@ -2,15 +2,15 @@ import { AsyncImage } from "loadable-image";
 import { Genres, MovieAndTVshow } from "../hooks/types";
 
 const Card = ({
-  movie,
+  movies,
   MoviesGenres,
   className,
 }: {
-  movie: MovieAndTVshow;
-  MoviesGenres?: Genres;
+  movies?: MovieAndTVshow[];
+  MoviesGenres?: Genres[];
   className?: string;
 }) => {
-  return (
+  return movies?.map((movie) => (
     <div
       className={` relative text-white  rounded-3xl overflow-hidden text-lg ${className}`}
     >
@@ -26,10 +26,7 @@ const Card = ({
       </h1>
 
       <span className="badge badge-lg glass absolute bottom-2 left-2 font-semibold">
-        {
-          MoviesGenres?.genres.find((gen) => movie.genre_ids.includes(gen.id))
-            ?.name
-        }
+        {MoviesGenres?.find((gen) => movie.genre_ids.includes(gen.id))?.name}
       </span>
       <span className="badge badge-lg glass absolute bottom-9 left-2 font-semibold">
         {Number(movie.vote_average).toFixed(1)}
@@ -38,7 +35,7 @@ const Card = ({
         Show Details
       </button>
     </div>
-  );
+  ));
 };
 
 export default Card;

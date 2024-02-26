@@ -1,21 +1,18 @@
+import { BiSolidCategory } from "react-icons/bi";
+import { FaStar } from "react-icons/fa";
+import { MdDateRange } from "react-icons/md";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FaStar } from "react-icons/fa";
-import { BiSolidCategory } from "react-icons/bi";
-import { MdDateRange } from "react-icons/md";
 
+import { AsyncImage } from "loadable-image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Genres, MovieAndTVshow } from "../hooks/types";
-import { AsyncImage } from "loadable-image";
+import { MovieAndTVshow } from "../hooks/types";
+import useGenreStore from "../store";
 
-interface Props {
-  data?: MovieAndTVshow[];
-  MoviesGenres?: Genres;
-}
-
-const Slider = ({ data, MoviesGenres }: Props) => {
+const Slider = ({ data }: { data?: MovieAndTVshow[] }) => {
+  const genres = useGenreStore((s) => s.genres);
   return (
     <Swiper
       pagination
@@ -41,11 +38,7 @@ const Slider = ({ data, MoviesGenres }: Props) => {
                 </div>
                 <div className="flex gap-1 items-center font-semibold">
                   <BiSolidCategory className="text-primary" />
-                  {
-                    MoviesGenres?.genres.find((gen) =>
-                      item.genre_ids.includes(gen.id)
-                    )?.name
-                  }
+                  {genres.find((gen) => item.genre_ids.includes(gen.id))?.name}
                 </div>
                 <div className="flex gap-1 items-center font-semibold">
                   <MdDateRange className="text-primary" />

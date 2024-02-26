@@ -5,21 +5,25 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 
-import { Genres, MovieAndTVshow } from "../hooks/types";
 import { AsyncImage } from "loadable-image";
+import { MovieAndTVshow } from "../hooks/types";
+import useGenreStore from "../store";
 
 interface Props {
   data?: MovieAndTVshow[];
-  MoviesGenres?: Genres;
   isLoading?: boolean;
 }
 
-const FreeModeSlider = ({ data, MoviesGenres, isLoading }: Props) => {
+const FreeModeSlider = ({ data, isLoading }: Props) => {
+  const genres = useGenreStore((s) => s.genres);
   return (
     <Swiper
       spaceBetween={10}
       slidesPerView={1}
       breakpoints={{
+        478: {
+          slidesPerView: 2,
+        },
         560: {
           slidesPerView: 2,
         },
@@ -27,16 +31,16 @@ const FreeModeSlider = ({ data, MoviesGenres, isLoading }: Props) => {
           slidesPerView: 3,
         },
         1024: {
-          slidesPerView: 4,
+          slidesPerView: 5,
         },
       }}
       freeMode
       navigation
       modules={[FreeMode, Navigation]}
-      className="h-[19rem]"
+      className="h-[18.5rem]"
     >
       {isLoading &&
-        [1, 2, 3, 4].map((item) => (
+        [1, 2, 3, 4, 5].map((item) => (
           <SwiperSlide key={item}>
             <div className="skeleton w-full h-[19rem]"></div>
           </SwiperSlide>
@@ -56,11 +60,7 @@ const FreeModeSlider = ({ data, MoviesGenres, isLoading }: Props) => {
             </h1>
 
             <span className="badge badge-lg glass absolute bottom-2 left-2 font-semibold">
-              {
-                MoviesGenres?.genres.find((gen) =>
-                  item.genre_ids.includes(gen.id)
-                )?.name
-              }
+              {genres.find((gen) => item.genre_ids.includes(gen.id))?.name}
             </span>
             <span className="badge badge-lg glass absolute bottom-9 left-2 font-semibold">
               {Number(item.vote_average).toFixed(1)}

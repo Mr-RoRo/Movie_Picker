@@ -6,12 +6,15 @@ import { Genres, MovieAndTVshow } from "../../hooks/types";
 import useGet from "../../hooks/useGet";
 import { FetchResponse } from "../../services/ApiClient";
 import DividerSectionTitle from "../../components/DividerSectionTitle";
+import useGenreStore from "../../store";
 
 const HomePage = () => {
+  //get genres list
+  getGenres();
+
   const [searchParams] = useSearchParams();
-  const { data: moviesGenres } = useGet<Genres>("genre/movie/list", [
-    "moviesGenres",
-  ]);
+
+  //get trending movies and tv shows
   const { data: trendingMovies } = useGet<FetchResponse<MovieAndTVshow>>(
     "trending/movie/day",
     ["trendingMovies"],
@@ -22,6 +25,8 @@ const HomePage = () => {
     ["trendingTVshows"],
     24 * 10 * 10 * 1000
   );
+
+  //get popular movies and tv shows
   const { data: popular, isLoading: popularLoading } = useGet<
     FetchResponse<MovieAndTVshow>
   >(
@@ -32,6 +37,8 @@ const HomePage = () => {
     ],
     24 * 10 * 10 * 1000
   );
+
+  //get topRated movies and tv shows
   const { data: topRated, isLoading: topRatedLoading } = useGet<
     FetchResponse<MovieAndTVshow>
   >(
@@ -46,23 +53,29 @@ const HomePage = () => {
   return (
     <div>
       <DividerSectionTitle Title={"Trending Movies"} className="mb-10 mt-0" />
-      <Slider data={trendingMovies?.results} MoviesGenres={moviesGenres} />
+      <Slider data={trendingMovies?.results} />
       <SectionTitle Title="Popular" />
-      <FreeModeSlider
-        data={popular?.results}
-        MoviesGenres={moviesGenres}
-        isLoading={popularLoading}
-      />
+      <FreeModeSlider data={popular?.results} isLoading={popularLoading} />
       <DividerSectionTitle Title={"Trending TVshows"} className="my-10" />
-      <Slider data={trendingTVshows?.results} MoviesGenres={moviesGenres} />
+      <Slider data={trendingTVshows?.results} />
       <SectionTitle Title="TopRated" />
-      <FreeModeSlider
-        data={topRated?.results}
-        MoviesGenres={moviesGenres}
-        isLoading={topRatedLoading}
-      />
+      <FreeModeSlider data={topRated?.results} isLoading={topRatedLoading} />
     </div>
   );
 };
 
 export default HomePage;
+
+const getGenres = () => {
+  const setGenres = useGenreStore((s) => s.setGenres);
+  const { data: moviesGenres, isFetched: isMoviesGenreFetched } = useGet<{
+    genres: Genres[];
+  }>("genre/movie/list", ["moviesGenres"]);
+  const { data: tvshowsGenres, isFetched: isTVshowsGenreFetched } = useGet<{
+    genres: Genres[];
+  }>("genre/tv/list", ["tvshowsGenres"]);
+
+  if (isMoviesGenreFetched) setGenres(moviesGenres?.genres!);
+
+  if (isTVshowsGenreFetched) setGenres(tvshowsGenres?.genres!);
+};
