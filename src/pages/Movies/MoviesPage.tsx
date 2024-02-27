@@ -3,16 +3,22 @@ import Card from "../../components/Card";
 import SearchBar from "../../components/SearchBar";
 import { MovieAndTVshow } from "../../hooks/types";
 import useInfiniteGet from "../../hooks/useInfiniteGet";
-import { useGenreStore, useSearch } from "../../store";
+import { useFilter, useGenreStore, useSearch } from "../../store";
 
 const MoviesPage = () => {
   const search = useSearch((s) => s.search);
+  const genres = useGenreStore((s) => s.genres);
+  const { releaseYear, scoreDown, scoreUp, genre, sortBy, submit } =
+    useFilter();
 
   const {
     data: movies,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteGet<MovieAndTVshow>("discover/movie", ["movies"]);
+  } = useInfiniteGet<MovieAndTVshow>(
+    `discover/movie?primary_release_year=${releaseYear}&vote_average.lte=${scoreDown}&vote_average.gte=${scoreUp}&with_genres=${genre}&sort_by=${sortBy}`,
+    ["movies", submit]
+  );
 
   const {
     data: searchedMovies,
@@ -24,7 +30,6 @@ const MoviesPage = () => {
     search,
   ]);
 
-  const genres = useGenreStore((s) => s.genres);
   return (
     <div className="flex flex-col gap-5">
       <SearchBar />
