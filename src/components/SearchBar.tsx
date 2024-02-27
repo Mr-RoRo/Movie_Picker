@@ -1,8 +1,14 @@
 import { CiSearch, CiFilter } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
-import { initialGenres, useFilter, useSearch } from "../store";
+import { useFilter, useSearch } from "../store";
 import { useState } from "react";
-const SearchBar = () => {
+import { Genres, SortedItems } from "../hooks/types";
+
+interface Props {
+  sortedItems: SortedItems[];
+  genres?: Genres[];
+}
+const SearchBar = ({ sortedItems, genres }: Props) => {
   const filterFields = [
     { id: 1, name: "Release Year", placeholder: "Year..." },
     { id: 2, name: "score of more than input", placeholder: "Score..." },
@@ -10,16 +16,7 @@ const SearchBar = () => {
     { id: 4, name: "Genre", inputType: "selectInput" },
     { id: 4, name: "Sort By", inputType: "selectInput" },
   ];
-  const sortedItems = [
-    { id: 1, name: "title.asc", label: "title ↑" },
-    { id: 2, name: "title.desc", label: "title ↓" },
-    { id: 3, name: "vote_average.asc", label: "rating ↑" },
-    { id: 4, name: "vote_average.desc", label: "rating ↓" },
-    { id: 5, name: "primary_release_date.asc", label: "release date ↑" },
-    { id: 6, name: "primary_release_date.desc", label: "release date ↓" },
-    { id: 7, name: "popularity.asc", label: "popularity ↑" },
-    { id: 8, name: "popularity.desc", label: "popularity ↓" },
-  ];
+
   const setSearch = useSearch((s) => s.setSearch);
   const [openFilter, setOpenFilter] = useState(false);
   const {
@@ -30,8 +27,8 @@ const SearchBar = () => {
     setScoreUp,
     scoreDown,
     scoreUp,
-    genre,
     sortBy,
+    genre,
     setSortBy,
     setGenre,
   } = useFilter();
@@ -88,7 +85,7 @@ const SearchBar = () => {
                         </option>
                       ))}
                     {fields.name === "Genre" &&
-                      initialGenres.map((genre) => (
+                      genres?.map((genre) => (
                         <option value={genre.id} key={genre.id}>
                           {genre.name}
                         </option>
