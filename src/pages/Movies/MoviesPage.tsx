@@ -56,7 +56,7 @@ const MoviesPage = () => {
             <span className="loading loading-infinity loading-lg self-center"></span>
           }
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-7 mt-3">
             {(searchedMovies?.pages[0].total_results
               ? searchedMovies
               : movies
