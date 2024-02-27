@@ -73,6 +73,27 @@ export const initialGenres = [
   { id: 37, name: "Western" },
 ];
 
+export const sortedItemsTVshows = [
+  { id: 1, name: "name.asc", label: "name ↑" },
+  { id: 2, name: "name.desc", label: "name ↓" },
+  { id: 3, name: "vote_average.asc", label: "rating ↑" },
+  { id: 4, name: "vote_average.desc", label: "rating ↓" },
+  { id: 5, name: "first_air_date_year.asc", label: "release date ↑" },
+  { id: 6, name: "first_air_date_year.desc", label: "release date ↓" },
+  { id: 7, name: "popularity.asc", label: "popularity ↑" },
+  { id: 8, name: "popularity.desc", label: "popularity ↓" },
+];
+
+export const sortedItemsMovies = [
+  { id: 1, name: "title.asc", label: "title ↑" },
+  { id: 2, name: "title.desc", label: "title ↓" },
+  { id: 3, name: "vote_average.asc", label: "rating ↑" },
+  { id: 4, name: "vote_average.desc", label: "rating ↓" },
+  { id: 5, name: "primary_release_date.asc", label: "release date ↑" },
+  { id: 6, name: "primary_release_date.desc", label: "release date ↓" },
+  { id: 7, name: "popularity.asc", label: "popularity ↑" },
+  { id: 8, name: "popularity.desc", label: "popularity ↓" },
+];
 
 interface GenresStore {
   genres: Genres[];
