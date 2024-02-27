@@ -68,6 +68,7 @@ export default HomePage;
 
 const getGenres = () => {
   const setGenres = useGenreStore((s) => s.setGenres);
+  setGenres([]); // clear initial genres
   const { data: moviesGenres, isFetched: isMoviesGenreFetched } = useGet<{
     genres: Genres[];
   }>("genre/movie/list", ["moviesGenres"]);
