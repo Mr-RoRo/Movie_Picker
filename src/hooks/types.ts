@@ -22,3 +22,9 @@ export interface Genres {
   id: number;
   name: string;
 }
+
+export interface SortedItems {
+  id: number;
+  name: string;
+  label: string;
+}
