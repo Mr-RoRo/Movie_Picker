@@ -19,12 +19,6 @@ const menuItems = [
     icon: <LiaTvSolid className="text-2xl" />,
     link: "/tvshows",
   },
-  {
-    id: 4,
-    label: "Celebrities",
-    icon: <LuBadgeCheck className="text-2xl" />,
-    link: "/celebrities",
-  },
 ];
 const NavBar = () => {
   const location = useLocation();

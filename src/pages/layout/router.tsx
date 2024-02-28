@@ -12,7 +12,6 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "movies", element: <MoviesPage /> },
       { path: "tvshows", element: <TVshows /> },
-      { path: "celebrities" },
     ],
   },
 ]);
