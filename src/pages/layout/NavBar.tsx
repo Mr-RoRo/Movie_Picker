@@ -1,5 +1,4 @@
 import { FiHome } from "react-icons/fi";
-import { LuBadgeCheck } from "react-icons/lu";
 import { MdOutlineMovie } from "react-icons/md";
 import { LiaTvSolid } from "react-icons/lia";
 import { Link, useLocation } from "react-router-dom";
