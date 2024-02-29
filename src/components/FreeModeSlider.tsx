@@ -8,13 +8,15 @@ import "swiper/css/navigation";
 import { AsyncImage } from "loadable-image";
 import { MovieAndTVshow } from "../hooks/types";
 import { useGenreStore } from "../store";
+import { Link } from "react-router-dom";
 
 interface Props {
   data?: MovieAndTVshow[];
   isLoading?: boolean;
+  typeSlider: string | null;
 }
 
-const FreeModeSlider = ({ data, isLoading }: Props) => {
+const FreeModeSlider = ({ data, isLoading, typeSlider }: Props) => {
   const genres = useGenreStore((s) => s.genres);
   return (
     <Swiper
@@ -65,9 +67,11 @@ const FreeModeSlider = ({ data, isLoading }: Props) => {
             <span className="badge badge-lg glass absolute bottom-9 left-2 font-semibold">
               {Number(item.vote_average).toFixed(1)}
             </span>
-            <button className="btn glass absolute bottom-2.5 right-2">
-              Show Details
-            </button>
+            <Link to={`${typeSlider}/${item.id}`}>
+              <button className="btn glass absolute bottom-2.5 right-2">
+                Show Details
+              </button>
+            </Link>
           </div>
         </SwiperSlide>
       ))}

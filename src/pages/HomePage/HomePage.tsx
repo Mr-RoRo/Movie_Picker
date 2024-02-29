@@ -55,11 +55,23 @@ const HomePage = () => {
       <DividerSectionTitle Title={"Trending Movies"} className="mb-10 mt-0" />
       <Slider data={trendingMovies?.results} />
       <SectionTitle Title="Popular" />
-      <FreeModeSlider data={popular?.results} isLoading={popularLoading} />
+      <FreeModeSlider
+        data={popular?.results}
+        isLoading={popularLoading}
+        typeSlider={
+          searchParams.get("Popular") === "TVshows" ? "TVshows" : "Movies"
+        }
+      />
       <DividerSectionTitle Title={"Trending TVshows"} className="my-10" />
       <Slider data={trendingTVshows?.results} />
       <SectionTitle Title="TopRated" />
-      <FreeModeSlider data={topRated?.results} isLoading={topRatedLoading} />
+      <FreeModeSlider
+        data={topRated?.results}
+        isLoading={topRatedLoading}
+        typeSlider={
+          searchParams.get("Popular") === "TVshows" ? "TVshows" : "Movies"
+        }
+      />
     </div>
   );
 };
